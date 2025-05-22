@@ -1,145 +1,25 @@
-[
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1782384984.787378,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "ps_l",
-        "path": "/",
-        "sameSite": "lax",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "1"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1782491905.902871,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "datr",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "irAtaJYdjn62jqNeLBsXHTBX"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1755600983.70719,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "fr",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "0Ldaxucq665EdcPnK.AWfxTWEdQkSMch9bfEDpgR6EW-_lkx4lhDTukNk-0hR_NTjRhKo.BoLbCK..AAA.0.0.BoLbFS.AWd9ex61YAW5E48xDsTRF9nqALg"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1753115905,
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "vpd",
-        "path": "/",
-        "sameSite": "lax",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "v1%3B844x424x2.549999952316284"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1779360983.707976,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "xs",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "4%3AD_V5jNAwXQYyww%3A2%3A1747824980%3A-1%3A11859"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1779467905,
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "fbl_st",
-        "path": "/",
-        "sameSite": "strict",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "101233889%3BT%3A29132198"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1748429784.205655,
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "locale",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "en_US"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1779360983.706614,
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "c_user",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "100001254496650"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1782384984.788422,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "ps_n",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "1"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1782384983.707769,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "sb",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "irAtaFeUJ3FpIS_XBsX3kHgW"
-    },
-    {
-        "domain": ".facebook.com",
-        "expirationDate": 1755707912,
-        "hostOnly": false,
-        "httpOnly": false,
-        "name": "wl_cbv",
-        "path": "/",
-        "sameSite": "no_restriction",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "v2%3Bclient_version%3A2824%3Btimestamp%3A1747931904%3BCRCM%3A1936676370"
-    }
-]
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm start
